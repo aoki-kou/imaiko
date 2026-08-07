@@ -1,0 +1,14 @@
+# Local development image (hot-reload via bind mount).
+ARG NODE_VERSION=20-slim
+FROM node:$NODE_VERSION
+
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 5173
+
+CMD ["npm", "run", "dev"]
