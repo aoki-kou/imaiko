@@ -40,5 +40,14 @@ module App
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Devise's sign_in/sign_up always attempt to write the resource to the
+    # Warden session, even though authentication itself is fully stateless
+    # (JWT-based). Without a session store, ActionController::API raises
+    # ActionDispatch::Request::Session::DisabledSessionError. This session
+    # is never read for authentication purposes; only the JWT is trusted.
+    config.session_store :cookie_store, key: "_imaiko_session"
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use config.session_store, config.session_options
   end
 end
