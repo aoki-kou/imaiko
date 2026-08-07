@@ -76,7 +76,7 @@ devise-jwtを採用する。
 | # | タスク | 進捗 |
 |---|---|---|
 | 1 | バックエンド初期構築 | 完了 |
-| 2 | フロントエンド初期構築+疎通確認 | 未着手 |
+| 2 | フロントエンド初期構築+疎通確認 | 完了 |
 | 3 | 認証(devise-jwt)導入+API実装+RSpec | 未着手 |
 | 4 | フロント 会員登録/ログイン/ログアウト | 未着手 |
 | 5 | Placeモデル+CRUD API+RSpec | 未着手 |
@@ -92,3 +92,4 @@ devise-jwtを採用する。
 |---|---|
 | 2026-08-05 | MVP範囲・タスク一覧を確定し、development-plan.mdを新規作成 |
 | 2026-08-07 | タスク#1(バックエンド初期構築)完了。backend/にRails 8 API(Ruby 3.3.12)を構築、docker-compose.yml(backend + PostgreSQL)を追加、/upヘルスチェックで200を確認 |
+| 2026-08-07 | タスク#2(フロントエンド初期構築+疎通確認)完了。frontend/にVite + React + TypeScriptプロジェクトを構築、docker-compose.ymlにfrontendサービス(ポート5173)を追加、backendにrack-corsを導入しlocalhost:5173からのアクセスを許可、React側からGET /upを呼び出し画面上に接続結果を表示することを確認 |
