@@ -79,8 +79,8 @@ devise-jwtを採用する。
 | 2 | フロントエンド初期構築+疎通確認 | 完了 |
 | 3 | 認証(devise-jwt)導入+API実装+RSpec | 完了 |
 | 4 | フロント 会員登録/ログイン/ログアウト | 完了 |
-| 5 | Placeモデル+CRUD API+RSpec | 未着手 |
-| 6 | フロント 都道府県選択画面 | 未着手 |
+| 5 | Placeモデル+CRUD API+RSpec | 完了 |
+| 6 | フロント 都道府県選択画面 | 完了 |
 | 7 | フロント 場所一覧+削除 | 未着手 |
 | 8 | フロント 場所登録・編集 | 未着手 |
 | 9 | Renderデプロイ設定 | 未着手 |
@@ -95,3 +95,4 @@ devise-jwtを採用する。
 | 2026-08-07 | タスク#2(フロントエンド初期構築+疎通確認)完了。frontend/にVite + React + TypeScriptプロジェクトを構築、docker-compose.ymlにfrontendサービス(ポート5173)を追加、backendにrack-corsを導入しlocalhost:5173からのアクセスを許可、React側からGET /upを呼び出し画面上に接続結果を表示することを確認 |
 | 2026-08-07 | タスク#3(認証devise-jwt導入)完了。devise+devise-jwtを導入しUserモデル(email/encrypted_password/jti)を作成、JWT失効はJTIMatcher方式(jtiユニークインデックス)を採用、JWT署名鍵はsecret_key_baseと分離した専用のjwt_secret_keyをCredentialsで管理。POST /users(会員登録)・POST /users/sign_in(ログイン)・DELETE /users/sign_out(ログアウト)・GET /current_user(現在ユーザー取得)をJSON APIとして実装し、CORSでAuthorizationヘッダをexpose。RSpec(モデルspec6件+requestスペック7件、計13件)全てpass。curlによる実サーバでの会員登録→ログイン→current_user取得→ログアウト→トークン失効の一連フローも確認済み |
 | 2026-08-09 | タスク#4(フロント 会員登録/ログイン/ログアウト)完了。react-router-domを追加し、AuthContext(React Context+localStorage)でJWTとログイン状態を管理。/register・/loginの公開画面、認証必須の保護ルート(未ログイン時は/loginへリダイレクト、ログイン中は/login・/registerから/へリダイレクト)、入力バリデーションエラー表示を実装。バックエンドAPI呼び出し時にAccept: application/jsonヘッダを付与し、Devise認証失敗時のエラーレスポンスがJSONで返るよう対応。ブラウザでの登録→自動ログイン→リロードでのセッション復元→ログアウト→未ログイン時リダイレクト→誤ったパスワードでのエラー表示→再ログインの一連の流れを確認済み |
+| 2026-08-20 | タスク#6(フロント 都道府県選択画面)完了。47都道府県を`frontend/src/constants/prefectures.ts`に定数配列として切り出し(バックエンドのPlaceモデルのPREFECTURES定義に準拠した表記・順序)。トップ画面(`/`)を`PrefectureListPage`とし、都道府県一覧表示とログアウト機能(旧HomePageから統合)を実装、各都道府県クリックで`/places?prefecture=<都道府県名>`へ遷移するようにした。クエリパラメータの組み立てにはreact-router-domの`createSearchParams`を用い、手動encodeURIComponentによる二重エンコードを回避。遷移先の`/places`には最小限のプレースホルダー(`PlacesPage`)を追加し、クエリパラメータの都道府県名を表示するのみとした(一覧取得・表示はタスク#7で実装予定)。build(tsc + vite build)・lint(oxlint)ともに成功。ブラウザで未ログイン時のリダイレクト、会員登録→ログイン後のトップ画面表示、都道府県一覧の表示、リンクURLのエンコード内容、クリックによる遷移と表示、戻るリンクの動作を確認済み |
