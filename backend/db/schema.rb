@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_07_084715) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_10_122053) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "places", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "memo"
+    t.string "name", null: false
+    t.string "prefecture", null: false
+    t.datetime "updated_at", null: false
+    t.string "url"
+    t.bigint "user_id", null: false
+    t.index ["user_id", "prefecture"], name: "index_places_on_user_id_and_prefecture"
+    t.index ["user_id"], name: "index_places_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -23,4 +35,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_07_084715) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["jti"], name: "index_users_on_jti", unique: true
   end
+
+  add_foreign_key "places", "users"
 end
