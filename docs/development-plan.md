@@ -81,7 +81,7 @@ devise-jwtを採用する。
 | 4 | フロント 会員登録/ログイン/ログアウト | 完了 |
 | 5 | Placeモデル+CRUD API+RSpec | 完了 |
 | 6 | フロント 都道府県選択画面 | 完了 |
-| 7 | フロント 場所一覧+削除 | 未着手 |
+| 7 | フロント 場所一覧+削除 | 完了 |
 | 8 | フロント 場所登録・編集 | 未着手 |
 | 9 | Renderデプロイ設定 | 未着手 |
 | 10 | 不足テストの確認・補完+本番動作確認 | 未着手 |
@@ -97,3 +97,4 @@ devise-jwtを採用する。
 | 2026-08-09 | タスク#4(フロント 会員登録/ログイン/ログアウト)完了。react-router-domを追加し、AuthContext(React Context+localStorage)でJWTとログイン状態を管理。/register・/loginの公開画面、認証必須の保護ルート(未ログイン時は/loginへリダイレクト、ログイン中は/login・/registerから/へリダイレクト)、入力バリデーションエラー表示を実装。バックエンドAPI呼び出し時にAccept: application/jsonヘッダを付与し、Devise認証失敗時のエラーレスポンスがJSONで返るよう対応。ブラウザでの登録→自動ログイン→リロードでのセッション復元→ログアウト→未ログイン時リダイレクト→誤ったパスワードでのエラー表示→再ログインの一連の流れを確認済み |
 | 2026-08-10 | タスク#5(Placeモデル+CRUD API+RSpec)完了。Placeモデル(name, prefecture, url, memo, user_id)を作成し、prefectureは47都道府県の定数によるinclusionバリデーション、urlは空欄許可・入力時はhttps形式のみ許可するバリデーションを実装。登録/一覧(都道府県フィルタ)/更新/削除APIを`current_user.places`起点でscopeし、他ユーザーのPlaceを指定した場合はApplicationControllerの共通rescue_fromにより404を返すよう対応。RSpec(モデルspec10件+requestスペック13件)を追加し、既存分と合わせて全36件pass。curlによる実サーバでの登録→不正な都道府県での422確認→都道府県フィルタ付き一覧取得の一連フローも確認済み |
 | 2026-08-20 | タスク#6(フロント 都道府県選択画面)完了。47都道府県を`frontend/src/constants/prefectures.ts`に定数配列として切り出し(バックエンドのPlaceモデルのPREFECTURES定義に準拠した表記・順序)。トップ画面(`/`)を`PrefectureListPage`とし、都道府県一覧表示とログアウト機能(旧HomePageから統合)を実装、各都道府県クリックで`/places?prefecture=<都道府県名>`へ遷移するようにした。クエリパラメータの組み立てにはreact-router-domの`createSearchParams`を用い、手動encodeURIComponentによる二重エンコードを回避。遷移先の`/places`には最小限のプレースホルダー(`PlacesPage`)を追加し、クエリパラメータの都道府県名を表示するのみとした(一覧取得・表示はタスク#7で実装予定)。build(tsc + vite build)・lint(oxlint)ともに成功。ブラウザで未ログイン時のリダイレクト、会員登録→ログイン後のトップ画面表示、都道府県一覧の表示、リンクURLのエンコード内容、クリックによる遷移と表示、戻るリンクの動作を確認済み |
+| 2026-08-30 | タスク#7(フロント 場所一覧+削除)完了。着手前に、mainへマージ済みだった`feature/backend_place_crud`(Place CRUD API)が本ブランチに未反映であることを確認し、mainをmergeして取り込み済み。`frontend/src/features/places/placesApi.ts`を新規追加し、`fetchPlaces`(`GET /places?prefecture=`、クエリ組み立てはURLSearchParamsを使用し手動エンコードは行わない)・`deletePlace`(`DELETE /places/:id`)・`PlacesApiError`を実装。`PlacesPage`のプレースホルダーを置き換え、都道府県別の一覧取得・表示、0件時の表示、都道府県未選択時の表示(読み込み中のまま止まらないよう分岐)、削除操作(`window.confirm`による確認、成功時は一覧から即時除外、失敗時は一覧を変更せずエラー表示)を実装。lint(oxlint)・build(tsc + vite build)ともに成功、フロントエンドの自動テストは未導入のため対象外。docker composeでバックエンド・フロントエンドを起動し、DBマイグレーション(Placeテーブル作成)を適用、テスト用ユーザーと東京都の場所2件を用いてブラウザで一覧表示(複数件・0件・都道府県未選択)を確認。削除操作は自動化環境の制約でネイティブ確認ダイアログを直接操作できないため、キャンセル時の非変化はブラウザで確認し、確認OK時の削除はAPIを直接呼び出し一覧への反映(再取得後に対象が消えること)を確認した |
