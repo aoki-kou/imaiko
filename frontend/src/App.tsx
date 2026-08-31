@@ -2,6 +2,8 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { PublicOnlyRoute } from './components/PublicOnlyRoute'
 import { LoginPage } from './pages/LoginPage'
+import { PlaceEditPage } from './pages/PlaceEditPage'
+import { PlaceNewPage } from './pages/PlaceNewPage'
 import { PlacesPage } from './pages/PlacesPage'
 import { PrefectureListPage } from './pages/PrefectureListPage'
 import { RegisterPage } from './pages/RegisterPage'
@@ -16,6 +18,8 @@ function App() {
       <Route element={<ProtectedRoute />}>
         <Route path="/" element={<PrefectureListPage />} />
         <Route path="/places" element={<PlacesPage />} />
+        <Route path="/places/new" element={<PlaceNewPage />} />
+        <Route path="/places/:id/edit" element={<PlaceEditPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
