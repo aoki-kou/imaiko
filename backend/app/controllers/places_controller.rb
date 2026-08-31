@@ -1,12 +1,16 @@
 class PlacesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_place, only: %i[update destroy]
+  before_action :set_place, only: %i[show update destroy]
 
   def index
     places = current_user.places
     places = places.where(prefecture: params[:prefecture]) if params[:prefecture].present?
 
     render json: places.map { |place| serialize_place(place) }, status: :ok
+  end
+
+  def show
+    render json: serialize_place(@place), status: :ok
   end
 
   def create

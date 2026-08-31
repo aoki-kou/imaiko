@@ -36,6 +36,27 @@ RSpec.describe "Places", type: :request do
     end
   end
 
+  describe "GET /places/:id" do
+    let!(:place) { Place.create!(name: "東京タワー", prefecture: "東京都", user: user) }
+    let!(:other_users_place) { Place.create!(name: "他人の場所", prefecture: "東京都", user: other_user) }
+
+    it "returns the current user's place" do
+      get "/places/#{place.id}", headers: headers
+      expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body)["id"]).to eq(place.id)
+    end
+
+    it "returns 404 for another user's place" do
+      get "/places/#{other_users_place.id}", headers: headers
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "requires authentication" do
+      get "/places/#{place.id}"
+      expect(response).to have_http_status(:unauthorized)
+    end
+  end
+
   describe "POST /places" do
     it "creates a place for the current user" do
       post "/places", params: { place: { name: "東京タワー", prefecture: "東京都", url: "https://example.com", memo: "夜景" } }, headers: headers

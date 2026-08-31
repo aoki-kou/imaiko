@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, createSearchParams, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../features/auth/useAuth'
 import { PlacesApiError, deletePlace, fetchPlaces } from '../features/places/placesApi'
 import type { Place } from '../features/places/placesApi'
@@ -51,6 +51,14 @@ export function PlacesPage() {
       </p>
       <h1>{prefecture ?? '未選択'}の場所一覧</h1>
 
+      {prefecture && (
+        <p>
+          <Link to={{ pathname: '/places/new', search: createSearchParams({ prefecture }).toString() }}>
+            新規登録
+          </Link>
+        </p>
+      )}
+
       {deleteError && <p role="alert">{deleteError}</p>}
 
       {!prefecture && <p>都道府県が選択されていません</p>}
@@ -76,6 +84,7 @@ export function PlacesPage() {
                 </p>
               )}
               {place.memo && <p>{place.memo}</p>}
+              <Link to={`/places/${place.id}/edit`}>編集</Link>{' '}
               <button
                 type="button"
                 onClick={() => handleDelete(place)}

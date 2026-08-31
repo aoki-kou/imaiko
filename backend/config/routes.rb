@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get "current_user" => "current_user#show"
 
-  resources :places, only: %i[index create update destroy]
+  resources :places, only: %i[index show create update destroy]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
