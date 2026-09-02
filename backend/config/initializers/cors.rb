@@ -5,9 +5,14 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
+allowed_origins = [
+  "http://localhost:5173",
+  ENV["FRONTEND_ORIGIN"]
+].compact
+
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:5173"
+    origins(*allowed_origins)
 
     resource "*",
       headers: :any,
