@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, createSearchParams, useSearchParams } from 'react-router-dom'
+import { Button } from '../components/ui/Button'
+import { Card } from '../components/ui/Card'
 import { useAuth } from '../features/auth/useAuth'
 import { PlacesApiError, deletePlace, fetchPlaces } from '../features/places/placesApi'
 import type { Place } from '../features/places/placesApi'
@@ -75,23 +77,26 @@ export function PlacesPage() {
         <ul>
           {places.map((place) => (
             <li key={place.id}>
-              <p>{place.name}</p>
-              {place.url && (
-                <p>
-                  <a href={place.url} target="_blank" rel="noreferrer">
-                    {place.url}
-                  </a>
-                </p>
-              )}
-              {place.memo && <p>{place.memo}</p>}
-              <Link to={`/places/${place.id}/edit`}>編集</Link>{' '}
-              <button
-                type="button"
-                onClick={() => handleDelete(place)}
-                disabled={deletingId === place.id}
-              >
-                削除
-              </button>
+              <Card>
+                <p>{place.name}</p>
+                {place.url && (
+                  <p>
+                    <a href={place.url} target="_blank" rel="noreferrer">
+                      {place.url}
+                    </a>
+                  </p>
+                )}
+                {place.memo && <p>{place.memo}</p>}
+                <Link to={`/places/${place.id}/edit`}>編集</Link>{' '}
+                <Button
+                  type="button"
+                  variant="danger"
+                  onClick={() => handleDelete(place)}
+                  disabled={deletingId === place.id}
+                >
+                  削除
+                </Button>
+              </Card>
             </li>
           ))}
         </ul>
