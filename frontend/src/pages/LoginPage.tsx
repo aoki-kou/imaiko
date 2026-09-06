@@ -2,6 +2,8 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import type { Location } from 'react-router-dom'
+import { Button } from '../components/ui/Button'
+import { Input } from '../components/ui/Input'
 import { AuthApiError } from '../features/auth/authApi'
 import { useAuth } from '../features/auth/useAuth'
 
@@ -35,26 +37,22 @@ export function LoginPage() {
     <main>
       <h1>ログイン</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">メールアドレス</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">パスワード</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+        <Input
+          id="email"
+          label="メールアドレス"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <Input
+          id="password"
+          label="パスワード"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
         {errors.length > 0 && (
           <ul>
             {errors.map((error) => (
@@ -62,9 +60,9 @@ export function LoginPage() {
             ))}
           </ul>
         )}
-        <button type="submit" disabled={submitting}>
+        <Button type="submit" disabled={submitting}>
           ログイン
-        </button>
+        </Button>
       </form>
       <p>
         アカウントをお持ちでない方は<Link to="/register">会員登録</Link>

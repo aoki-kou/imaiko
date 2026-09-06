@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { Button } from '../components/ui/Button'
+import { Input } from '../components/ui/Input'
 import { AuthApiError } from '../features/auth/authApi'
 import { useAuth } from '../features/auth/useAuth'
 
@@ -32,36 +34,30 @@ export function RegisterPage() {
     <main>
       <h1>会員登録</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">メールアドレス</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">パスワード</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password-confirmation">パスワード(確認)</label>
-          <input
-            id="password-confirmation"
-            type="password"
-            value={passwordConfirmation}
-            onChange={(e) => setPasswordConfirmation(e.target.value)}
-            required
-          />
-        </div>
+        <Input
+          id="email"
+          label="メールアドレス"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <Input
+          id="password"
+          label="パスワード"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <Input
+          id="password-confirmation"
+          label="パスワード(確認)"
+          type="password"
+          value={passwordConfirmation}
+          onChange={(e) => setPasswordConfirmation(e.target.value)}
+          required
+        />
         {errors.length > 0 && (
           <ul>
             {errors.map((error) => (
@@ -69,9 +65,9 @@ export function RegisterPage() {
             ))}
           </ul>
         )}
-        <button type="submit" disabled={submitting}>
+        <Button type="submit" disabled={submitting}>
           登録する
-        </button>
+        </Button>
       </form>
       <p>
         アカウントをお持ちの方は<Link to="/login">ログイン</Link>

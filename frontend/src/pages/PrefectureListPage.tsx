@@ -1,4 +1,5 @@
 import { Link, createSearchParams, useNavigate } from 'react-router-dom'
+import { Button } from '../components/ui/Button'
 import { PREFECTURES } from '../constants/prefectures'
 import { useAuth } from '../features/auth/useAuth'
 
@@ -15,9 +16,9 @@ export function PrefectureListPage() {
     <main>
       <h1>イマイコ(仮)</h1>
       <p>ログイン中: {user?.email}</p>
-      <button type="button" onClick={handleLogout}>
+      <Button type="button" onClick={handleLogout}>
         ログアウト
-      </button>
+      </Button>
       <h2>都道府県を選択</h2>
       <ul>
         {PREFECTURES.map((prefecture) => (
