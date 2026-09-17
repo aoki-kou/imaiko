@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import { Link, createSearchParams, useNavigate, useSearchParams } from 'react-router-dom'
+import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom'
+import { PageContainer } from '../components/ui/PageContainer'
+import { PageHeader } from '../components/ui/PageHeader'
 import { useAuth } from '../features/auth/useAuth'
 import { PlaceForm } from '../features/places/PlaceForm'
 import { PlacesApiError, createPlace } from '../features/places/placesApi'
@@ -30,11 +32,8 @@ export function PlaceNewPage() {
   }
 
   return (
-    <main>
-      <p>
-        <Link to="/">都道府県選択に戻る</Link>
-      </p>
-      <h1>場所の新規登録</h1>
+    <PageContainer>
+      <PageHeader backTo="/" backLabel="都道府県選択に戻る" title="場所の新規登録" />
       <PlaceForm
         initialValues={{ name: '', prefecture: initialPrefecture, url: '', memo: '' }}
         onSubmit={handleSubmit}
@@ -42,6 +41,6 @@ export function PlaceNewPage() {
         errors={errors}
         submitLabel="登録する"
       />
-    </main>
+    </PageContainer>
   )
 }

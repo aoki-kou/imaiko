@@ -1,12 +1,31 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-primary: #2f6b4f;
+  --color-brand-primary-hover: #255943;
+  --color-brand-primary-light: #eaf3ee;
+  --color-brand-accent: #f4a950;
+  --color-brand-bg: #f7f3e8;
+  --color-brand-surface: #ffffff;
+  --color-brand-text: #2b2b28;
+  --color-brand-muted: #78726a;
+  --color-brand-border: #e2dcc9;
+  --color-brand-danger: #c1443a;
+  --color-brand-danger-hover: #a5372f;
+
+  --font-brand: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', system-ui, 'Segoe UI', Roboto,
+    sans-serif;
+}
+
 @layer base {
   :root {
     color-scheme: light dark;
-    font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font-brand);
   }
 
   body {
     margin: 0;
+    background-color: var(--color-brand-bg);
+    color: var(--color-brand-text);
   }
 }

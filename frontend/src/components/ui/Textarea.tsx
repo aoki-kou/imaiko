@@ -1,17 +1,17 @@
 import type { ComponentPropsWithoutRef } from 'react'
 
-type InputProps = ComponentPropsWithoutRef<'input'> & {
+type TextareaProps = ComponentPropsWithoutRef<'textarea'> & {
   id: string
   label: string
 }
 
-export function Input({ id, label, className, ...rest }: InputProps) {
+export function Textarea({ id, label, className, ...rest }: TextareaProps) {
   return (
     <div>
       <label htmlFor={id} className="block text-sm font-medium text-brand-muted">
         {label}
       </label>
-      <input
+      <textarea
         id={id}
         className={[
           'mt-1 w-full rounded-xl border border-brand-border bg-brand-surface px-3 py-2 text-brand-text',
