@@ -1,20 +1,32 @@
 import type { ComponentPropsWithoutRef } from 'react'
 
 type ButtonVariant = 'primary' | 'danger'
+type ButtonSize = 'md' | 'sm'
 
 type ButtonProps = ComponentPropsWithoutRef<'button'> & {
   variant?: ButtonVariant
+  size?: ButtonSize
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: 'bg-blue-600 text-white hover:bg-blue-700 disabled:bg-blue-300',
-  danger: 'bg-red-600 text-white hover:bg-red-700 disabled:bg-red-300',
+  primary: 'bg-brand-primary text-white hover:bg-brand-primary-hover disabled:bg-brand-primary/40',
+  danger: 'bg-brand-danger text-white hover:bg-brand-danger-hover disabled:bg-brand-danger/40',
 }
 
-export function Button({ variant = 'primary', className, ...rest }: ButtonProps) {
+const sizeClasses: Record<ButtonSize, string> = {
+  md: 'px-4 py-2 text-base',
+  sm: 'px-3 py-1 text-sm',
+}
+
+export function Button({ variant = 'primary', size = 'md', className, ...rest }: ButtonProps) {
   return (
     <button
-      className={['rounded px-4 py-2 disabled:cursor-not-allowed', variantClasses[variant], className]
+      className={[
+        'rounded-full font-semibold transition-colors disabled:cursor-not-allowed',
+        variantClasses[variant],
+        sizeClasses[size],
+        className,
+      ]
         .filter(Boolean)
         .join(' ')}
       {...rest}

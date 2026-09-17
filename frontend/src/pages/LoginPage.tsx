@@ -3,7 +3,10 @@ import type { FormEvent } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import type { Location } from 'react-router-dom'
 import { Button } from '../components/ui/Button'
+import { FormErrors } from '../components/ui/FormErrors'
 import { Input } from '../components/ui/Input'
+import { Logo } from '../components/ui/Logo'
+import { PageContainer } from '../components/ui/PageContainer'
 import { AuthApiError } from '../features/auth/authApi'
 import { useAuth } from '../features/auth/useAuth'
 
@@ -34,9 +37,12 @@ export function LoginPage() {
   }
 
   return (
-    <main>
-      <h1>ログイン</h1>
-      <form onSubmit={handleSubmit}>
+    <PageContainer>
+      <div className="mb-8">
+        <Logo tagline />
+      </div>
+      <h1 className="mb-4 text-lg font-bold text-brand-text">ログイン</h1>
+      <form onSubmit={handleSubmit} className="space-y-4">
         <Input
           id="email"
           label="メールアドレス"
@@ -53,20 +59,17 @@ export function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {errors.length > 0 && (
-          <ul>
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        )}
-        <Button type="submit" disabled={submitting}>
+        <FormErrors errors={errors} />
+        <Button type="submit" disabled={submitting} className="w-full">
           ログイン
         </Button>
       </form>
-      <p>
-        アカウントをお持ちでない方は<Link to="/register">会員登録</Link>
+      <p className="mt-4 text-sm text-brand-muted">
+        アカウントをお持ちでない方は{' '}
+        <Link to="/register" className="text-brand-primary hover:underline">
+          会員登録
+        </Link>
       </p>
-    </main>
+    </PageContainer>
   )
 }

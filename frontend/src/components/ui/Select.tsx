@@ -1,17 +1,17 @@
 import type { ComponentPropsWithoutRef } from 'react'
 
-type InputProps = ComponentPropsWithoutRef<'input'> & {
+type SelectProps = ComponentPropsWithoutRef<'select'> & {
   id: string
   label: string
 }
 
-export function Input({ id, label, className, ...rest }: InputProps) {
+export function Select({ id, label, className, children, ...rest }: SelectProps) {
   return (
     <div>
       <label htmlFor={id} className="block text-sm font-medium text-brand-muted">
         {label}
       </label>
-      <input
+      <select
         id={id}
         className={[
           'mt-1 w-full rounded-xl border border-brand-border bg-brand-surface px-3 py-2 text-brand-text',
@@ -21,7 +21,9 @@ export function Input({ id, label, className, ...rest }: InputProps) {
           .filter(Boolean)
           .join(' ')}
         {...rest}
-      />
+      >
+        {children}
+      </select>
     </div>
   )
 }
