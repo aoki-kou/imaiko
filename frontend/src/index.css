@@ -13,6 +13,15 @@
   --color-brand-danger: #c1443a;
   --color-brand-danger-hover: #a5372f;
 
+  --color-region-hokkaido: #9dc3dd;
+  --color-region-tohoku: #8fc4b0;
+  --color-region-kanto: #e8a99e;
+  --color-region-chubu: #f3cd7e;
+  --color-region-kinki: #c6a8d1;
+  --color-region-chugoku: #a9c98a;
+  --color-region-shikoku: #9fd6c4;
+  --color-region-kyushu-okinawa: #f0b169;
+
   --font-brand: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', system-ui, 'Segoe UI', Roboto,
     sans-serif;
 }
