@@ -1,11 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import { useAuth } from '../features/auth/useAuth'
+import { AuthLoading } from './AuthLoading'
 
 export function PublicOnlyRoute() {
   const { status } = useAuth()
 
   if (status === 'loading') {
-    return <p>読み込み中...</p>
+    return <AuthLoading />
   }
 
   if (status === 'authenticated') {
