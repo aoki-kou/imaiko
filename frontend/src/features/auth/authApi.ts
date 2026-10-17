@@ -78,9 +78,10 @@ export async function logout(token: string): Promise<void> {
   })
 }
 
-export async function fetchCurrentUser(token: string): Promise<AuthUser> {
+export async function fetchCurrentUser(token: string, signal?: AbortSignal): Promise<AuthUser> {
   const res = await fetch(`${API_BASE_URL}/current_user`, {
     headers: { Authorization: token, Accept: 'application/json' },
+    signal,
   })
   if (!res.ok) {
     throw new AuthApiError(res.status, ['認証情報の取得に失敗しました'])
