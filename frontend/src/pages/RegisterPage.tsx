@@ -75,6 +75,11 @@ export function RegisterPage() {
           ログイン
         </Link>
       </p>
+      <p className="mt-8 text-center text-xs text-brand-muted">
+        <Link to="/privacy" className="hover:underline">
+          プライバシーポリシー
+        </Link>
+      </p>
     </PageContainer>
   )
 }
