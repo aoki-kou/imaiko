@@ -11,6 +11,7 @@ import { PlaceEditPage } from './pages/PlaceEditPage'
 import { PlaceNewPage } from './pages/PlaceNewPage'
 import { PlacesPage } from './pages/PlacesPage'
 import { PrefectureListPage } from './pages/PrefectureListPage'
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage'
 import { RegisterPage } from './pages/RegisterPage'
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
             <Route path="/places/new" element={<PlaceNewPage />} />
             <Route path="/places/:id/edit" element={<PlaceEditPage />} />
           </Route>
+          {/* ログイン前後のどちらからでも閲覧できるよう、認証ガードの外に置く */}
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       )}

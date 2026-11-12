@@ -1,4 +1,4 @@
-import { createSearchParams, useNavigate } from 'react-router-dom'
+import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import { JapanMap } from '../components/JapanMap'
 import { Button } from '../components/ui/Button'
 import { Logo } from '../components/ui/Logo'
@@ -34,6 +34,11 @@ export function PrefectureListPage() {
 
       <h2 className="mb-2 text-lg font-bold text-brand-text">都道府県を選択</h2>
       <JapanMap onSelectPrefecture={handleSelectPrefecture} />
+      <p className="mt-6 text-center text-xs text-brand-muted">
+        <Link to="/privacy" className="hover:underline">
+          プライバシーポリシー
+        </Link>
+      </p>
     </PageContainer>
   )
 }
