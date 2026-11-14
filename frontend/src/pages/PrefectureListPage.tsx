@@ -25,7 +25,7 @@ export function PrefectureListPage() {
   return (
     <PageContainer>
       <div className="mb-6 flex items-center justify-between">
-        <Logo />
+        <Logo layout="inline" />
         <Button type="button" onClick={handleLogout} size="sm">
           ログアウト
         </Button>

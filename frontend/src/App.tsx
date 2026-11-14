@@ -4,6 +4,7 @@ import { AuthErrorScreen } from './components/AuthErrorScreen'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { PublicOnlyRoute } from './components/PublicOnlyRoute'
 import { SplashScreen } from './components/SplashScreen'
+import { InkFilterDefs } from './components/ui/InkFilterDefs'
 import { useAuth } from './features/auth/useAuth'
 import { hasShownSplash } from './features/splash/splashStorage'
 import { LoginPage } from './pages/LoginPage'
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <>
+      <InkFilterDefs />
       {status === 'error' ? (
         <AuthErrorScreen />
       ) : (

@@ -6,7 +6,7 @@ export function FormErrors({ errors }: FormErrorsProps) {
   if (errors.length === 0) return null
 
   return (
-    <ul role="alert" className="rounded-xl bg-brand-danger/10 px-3 py-2 text-sm text-brand-danger">
+    <ul role="alert" className="rounded-sm border-l-4 border-brand-danger bg-brand-danger/10 px-3 py-2 text-sm text-brand-danger">
       {errors.map((error) => (
         <li key={error}>{error}</li>
       ))}
