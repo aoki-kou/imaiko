@@ -1,18 +1,35 @@
 @import "tailwindcss";
 
+/*
+ * A+案「藍と朱・和紙」のデザイントークン。
+ * 名前は役割(primary/accent/bg…)で付け、色の値だけをここで管理する。
+ * コントラスト(WCAG AA)の目安:
+ *   - text / muted / primary / accent-dark / danger は背景(bg・surface)上の小さい文字に使える(4.5:1以上)
+ *   - accent(朱)は塗り・大きい文字・アイコン向け。小さい文字には accent-dark を使う
+ */
 @theme {
-  --color-brand-primary: #2f6b4f;
-  --color-brand-primary-hover: #255943;
-  --color-brand-primary-light: #eaf3ee;
-  --color-brand-accent: #f4a950;
-  --color-brand-bg: #f7f3e8;
-  --color-brand-surface: #ffffff;
-  --color-brand-text: #2b2b28;
-  --color-brand-muted: #78726a;
-  --color-brand-border: #e2dcc9;
-  --color-brand-danger: #c1443a;
-  --color-brand-danger-hover: #a5372f;
+  /* 藍：メインの色(ボタン・リンク・見出し) */
+  --color-brand-primary: #1c2754;
+  --color-brand-primary-hover: #2f3d78;
+  --color-brand-primary-deep: #141c3f;
+  --color-brand-primary-light: #e6e8f1;
+  /* 朱：保存済み・強調・印 */
+  --color-brand-accent: #d9432a;
+  --color-brand-accent-dark: #b8341e;
+  --color-brand-accent-soft: #f7e3dc;
+  /* 金：区切り線などの控えめな装飾 */
+  --color-brand-gold: #b89a5e;
+  /* 和紙(背景)と紙(面) */
+  --color-brand-bg: #f5f0e3;
+  --color-brand-surface: #fdfaf2;
+  --color-brand-text: #1f2133;
+  --color-brand-muted: #67624f;
+  --color-brand-border: #e2d8c2;
+  --color-brand-border-strong: #d3c7aa;
+  --color-brand-danger: #b42318;
+  --color-brand-danger-hover: #8f1c13;
 
+  /* 日本地図の地方色(#18で保存件数による朱色の濃淡へ置き換える予定) */
   --color-region-hokkaido: #9dc3dd;
   --color-region-tohoku: #8fc4b0;
   --color-region-kanto: #e8a99e;
@@ -22,19 +39,49 @@
   --color-region-shikoku: #9fd6c4;
   --color-region-kyushu-okinawa: #f0b169;
 
-  --font-brand: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', system-ui, 'Segoe UI', Roboto,
-    sans-serif;
+  /* 本文：OS標準のゴシック体(Webフォントを読み込まない) */
+  --font-brand: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', 'Yu Gothic', Meiryo, system-ui,
+    'Segoe UI', Roboto, sans-serif;
+  /*
+   * 見出し：Shippori Mincho(セルフホスト、700のみ)。
+   * 読み込み中や未対応の文字はOS標準の明朝体で表示し、和の印象を保つ
+   */
+  --font-display: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', YuMincho, 'Noto Serif JP', serif;
+}
+
+/* 便箋のような罫線(メモ欄など) */
+@utility ruled-paper {
+  background-image: repeating-linear-gradient(transparent 0 31px, rgb(28 39 84 / 0.08) 31px 32px);
+  background-attachment: local;
+  line-height: 32px;
 }
 
 @layer base {
   :root {
-    color-scheme: light dark;
+    /* A+案はライトテーマのみ。ダークモード端末でフォーム部品だけが暗くなる不整合を防ぐ */
+    color-scheme: light;
     font-family: var(--font-brand);
   }
 
   body {
     margin: 0;
-    background-color: var(--color-brand-bg);
     color: var(--color-brand-text);
+    /* 和紙の繊維を思わせる細かな点 */
+    background-color: var(--color-brand-bg);
+    background-image:
+      radial-gradient(rgb(120 96 50 / 0.055) 1px, transparent 1.3px),
+      radial-gradient(rgb(120 96 50 / 0.04) 1px, transparent 1.3px);
+    background-size:
+      7px 7px,
+      13px 13px;
+    background-position:
+      0 0,
+      4px 6px;
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    letter-spacing: 0.06em;
   }
 }
