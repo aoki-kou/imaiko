@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { AuthErrorScreen } from './components/AuthErrorScreen'
+import { AppLayout } from './components/layout/AppLayout'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { PublicOnlyRoute } from './components/PublicOnlyRoute'
 import { SplashScreen } from './components/SplashScreen'
@@ -33,10 +34,13 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
           </Route>
           <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<PrefectureListPage />} />
-            <Route path="/places" element={<PlacesPage />} />
-            <Route path="/places/new" element={<PlaceNewPage />} />
-            <Route path="/places/:id/edit" element={<PlaceEditPage />} />
+            {/* ログイン後の画面は共通ナビゲーション付きのレイアウトで囲む */}
+            <Route element={<AppLayout />}>
+              <Route path="/" element={<PrefectureListPage />} />
+              <Route path="/places" element={<PlacesPage />} />
+              <Route path="/places/new" element={<PlaceNewPage />} />
+              <Route path="/places/:id/edit" element={<PlaceEditPage />} />
+            </Route>
           </Route>
           {/* ログイン前後のどちらからでも閲覧できるよう、認証ガードの外に置く */}
           <Route path="/privacy" element={<PrivacyPolicyPage />} />

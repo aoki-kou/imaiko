@@ -1,19 +1,11 @@
-import { createSearchParams, Link, useNavigate } from 'react-router-dom'
+import { createSearchParams, useNavigate } from 'react-router-dom'
 import { JapanMap } from '../components/JapanMap'
-import { Button } from '../components/ui/Button'
-import { Logo } from '../components/ui/Logo'
 import { PageContainer } from '../components/ui/PageContainer'
 import type { Prefecture } from '../constants/prefectures'
-import { useAuth } from '../features/auth/useAuth'
 
+// ロゴ・ログイン中のユーザー・ログアウト・プライバシーポリシーへの導線は共通ナビゲーション(AppLayout)にある
 export function PrefectureListPage() {
-  const { user, logout } = useAuth()
   const navigate = useNavigate()
-
-  async function handleLogout() {
-    await logout()
-    navigate('/login', { replace: true })
-  }
 
   function handleSelectPrefecture(prefecture: Prefecture) {
     navigate({
@@ -24,21 +16,8 @@ export function PrefectureListPage() {
 
   return (
     <PageContainer>
-      <div className="mb-6 flex items-center justify-between">
-        <Logo layout="inline" />
-        <Button type="button" onClick={handleLogout} size="sm">
-          ログアウト
-        </Button>
-      </div>
-      <p className="mb-6 text-sm text-brand-muted">ログイン中: {user?.email}</p>
-
-      <h2 className="mb-2 text-lg font-bold text-brand-text">都道府県を選択</h2>
+      <h1 className="mb-2 text-lg font-bold text-brand-text">都道府県を選択</h1>
       <JapanMap onSelectPrefecture={handleSelectPrefecture} />
-      <p className="mt-6 text-center text-xs text-brand-muted">
-        <Link to="/privacy" className="hover:underline">
-          プライバシーポリシー
-        </Link>
-      </p>
     </PageContainer>
   )
 }

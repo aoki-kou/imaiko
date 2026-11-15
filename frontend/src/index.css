@@ -13,6 +13,9 @@
   --color-brand-primary-hover: #2f3d78;
   --color-brand-primary-deep: #141c3f;
   --color-brand-primary-light: #e6e8f1;
+  /* 藍の面(ナビゲーション)の上に置く文字 */
+  --color-brand-on-primary: #ece6d6;
+  --color-brand-on-primary-muted: #c3c6da;
   /* 朱：保存済み・強調・印 */
   --color-brand-accent: #d9432a;
   --color-brand-accent-dark: #b8341e;
