@@ -61,17 +61,3 @@ export const PREFECTURE_TO_REGION: Record<Prefecture, Region> = {
   鹿児島県: '九州・沖縄',
   沖縄県: '九州・沖縄',
 }
-
-/**
- * 地方区分ごとの塗りつぶしクラス。色の値は index.css の @theme (--color-region-*) で定義する。
- */
-export const REGION_FILL_CLASS: Record<Region, string> = {
-  北海道: 'fill-region-hokkaido',
-  東北: 'fill-region-tohoku',
-  関東: 'fill-region-kanto',
-  中部: 'fill-region-chubu',
-  近畿: 'fill-region-kinki',
-  中国: 'fill-region-chugoku',
-  四国: 'fill-region-shikoku',
-  '九州・沖縄': 'fill-region-kyushu-okinawa',
-}

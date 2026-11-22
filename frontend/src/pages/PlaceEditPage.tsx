@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { createSearchParams, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { PageContainer } from '../components/ui/PageContainer'
 import { PageHeader } from '../components/ui/PageHeader'
 import { useAuth } from '../features/auth/useAuth'
 import { PlaceForm } from '../features/places/PlaceForm'
 import { PlacesApiError, fetchPlace, updatePlace } from '../features/places/placesApi'
 import type { Place, PlaceInput } from '../features/places/placesApi'
+import { mapHomePath } from '../features/shiori/useSelectedPrefecture'
 
 export function PlaceEditPage() {
   const { token } = useAuth()
@@ -37,7 +38,8 @@ export function PlaceEditPage() {
     setSubmitting(true)
     try {
       const updated = await updatePlace(token, Number(id), input)
-      navigate(`/places?${createSearchParams({ prefecture: updated.prefecture })}`)
+      // フォームの履歴を置き換え、戻る操作でフォームに戻らない(二重送信を防ぐ)
+      navigate(mapHomePath(updated.prefecture), { replace: true })
     } catch (err) {
       setErrors(err instanceof PlacesApiError ? err.errors : ['場所の更新に失敗しました'])
     } finally {
@@ -47,7 +49,8 @@ export function PlaceEditPage() {
 
   return (
     <PageContainer>
-      <PageHeader backTo="/" backLabel="都道府県選択に戻る" title="場所の編集" />
+      {/* 編集前の都道府県のしおりへ戻る(読み込み前は地図) */}
+      <PageHeader backTo={mapHomePath(place?.prefecture)} backLabel="地図に戻る" title="場所の編集" />
 
       {loadError && (
         <p role="alert" className="rounded-xl bg-brand-danger/10 px-3 py-2 text-sm text-brand-danger">

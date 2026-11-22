@@ -1,6 +1,16 @@
 import type { NavIconName } from '../../constants/navigation'
 
-export type IconName = NavIconName | 'close' | 'logout' | 'privacy'
+export type IconName =
+  | NavIconName
+  | 'close'
+  | 'logout'
+  | 'privacy'
+  | 'chevron-left'
+  | 'chevron-right'
+  | 'chevron-up'
+  | 'chevron-down'
+  | 'edit'
+  | 'external'
 
 const ICON_PATHS: Record<IconName, string[]> = {
   map: ['M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z', 'M9 4v14M15 6v14'],
@@ -15,6 +25,12 @@ const ICON_PATHS: Record<IconName, string[]> = {
   close: ['M6 6l12 12M18 6 6 18'],
   logout: ['M9 4H5v16h4', 'M14 8l4 4-4 4M18 12H9'],
   privacy: ['M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z', 'M9.5 12l2 2 3.5-4'],
+  'chevron-left': ['M15 6l-6 6 6 6'],
+  'chevron-right': ['M9 6l6 6-6 6'],
+  'chevron-up': ['M6 15l6-6 6 6'],
+  'chevron-down': ['M6 9l6 6 6-6'],
+  edit: ['M4 20h4L19 9l-4-4L4 16v4Z', 'M13.5 6.5l4 4'],
+  external: ['M14 4h6v6', 'M20 4l-9 9', 'M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5'],
 }
 
 type NavIconProps = {

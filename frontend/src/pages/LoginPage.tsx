@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import type { Location } from 'react-router-dom'
 import { Button } from '../components/ui/Button'
 import { FormErrors } from '../components/ui/FormErrors'
 import { Input } from '../components/ui/Input'
 import { Logo } from '../components/ui/Logo'
 import { PageContainer } from '../components/ui/PageContainer'
 import { AuthApiError } from '../features/auth/authApi'
+import { loginRedirectTarget } from '../features/auth/loginRedirect'
 import { useAuth } from '../features/auth/useAuth'
 
 export function LoginPage() {
@@ -20,7 +20,7 @@ export function LoginPage() {
   const [errors, setErrors] = useState<string[]>([])
   const [submitting, setSubmitting] = useState(false)
 
-  const redirectTo = (location.state as { from?: Location })?.from?.pathname ?? '/'
+  const redirectTo = loginRedirectTarget(location.state)
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
