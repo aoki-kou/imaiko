@@ -49,3 +49,8 @@ export const PREFECTURES = [
 ] as const
 
 export type Prefecture = (typeof PREFECTURES)[number]
+
+/** URLのクエリなど外部から来た文字列が、47都道府県のいずれかであるかを判定する */
+export function isPrefecture(value: string): value is Prefecture {
+  return (PREFECTURES as readonly string[]).includes(value)
+}

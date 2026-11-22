@@ -32,15 +32,15 @@
   --color-brand-danger: #b42318;
   --color-brand-danger-hover: #8f1c13;
 
-  /* 日本地図の地方色(#18で保存件数による朱色の濃淡へ置き換える予定) */
-  --color-region-hokkaido: #9dc3dd;
-  --color-region-tohoku: #8fc4b0;
-  --color-region-kanto: #e8a99e;
-  --color-region-chubu: #f3cd7e;
-  --color-region-kinki: #c6a8d1;
-  --color-region-chugoku: #a9c98a;
-  --color-region-shikoku: #9fd6c4;
-  --color-region-kyushu-okinawa: #f0b169;
+  /* 日本地図：保存件数による朱の濃淡(0件 / 1件 / 2件 / 3〜4件 / 5件以上) */
+  --color-map-level-0: #ebe5d4;
+  --color-map-level-1: #f0c3b3;
+  --color-map-level-2: #e58f77;
+  --color-map-level-3: #d85d40;
+  --color-map-level-4: #b5301b;
+  /* 県境の線(未保存の県 / 色づいた県) */
+  --color-map-border: #c9bea2;
+  --color-map-border-filled: #fbf4e6;
 
   /* 本文：OS標準のゴシック体(Webフォントを読み込まない) */
   --font-brand: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', 'Yu Gothic', Meiryo, system-ui,

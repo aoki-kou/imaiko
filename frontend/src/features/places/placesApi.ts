@@ -41,9 +41,10 @@ function extractErrors(payload: PlacesErrorPayload): string[] {
   return ['リクエストに失敗しました']
 }
 
-export async function fetchPlaces(token: string, prefecture: string): Promise<Place[]> {
-  const query = new URLSearchParams({ prefecture }).toString()
-  const res = await fetch(`${API_BASE_URL}/places?${query}`, {
+/** 場所の一覧を取得する。prefectureを省略するとログインユーザーの全件を返す */
+export async function fetchPlaces(token: string, prefecture?: string): Promise<Place[]> {
+  const query = prefecture ? `?${new URLSearchParams({ prefecture })}` : ''
+  const res = await fetch(`${API_BASE_URL}/places${query}`, {
     headers: { Authorization: token, Accept: 'application/json' },
   })
 

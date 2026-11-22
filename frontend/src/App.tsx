@@ -10,9 +10,9 @@ import { useAuth } from './features/auth/useAuth'
 import { hasShownSplash } from './features/splash/splashStorage'
 import { LoginPage } from './pages/LoginPage'
 import { PlaceEditPage } from './pages/PlaceEditPage'
+import { LegacyPlacesRedirect } from './pages/LegacyPlacesRedirect'
+import { MapHomePage } from './pages/MapHomePage'
 import { PlaceNewPage } from './pages/PlaceNewPage'
-import { PlacesPage } from './pages/PlacesPage'
-import { PrefectureListPage } from './pages/PrefectureListPage'
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage'
 import { RegisterPage } from './pages/RegisterPage'
 
@@ -36,8 +36,9 @@ function App() {
           <Route element={<ProtectedRoute />}>
             {/* ログイン後の画面は共通ナビゲーション付きのレイアウトで囲む */}
             <Route element={<AppLayout />}>
-              <Route path="/" element={<PrefectureListPage />} />
-              <Route path="/places" element={<PlacesPage />} />
+              <Route path="/" element={<MapHomePage />} />
+              {/* 旧URL(/places?prefecture=)は地図ホームへ転送する。#19で全件一覧(/places)を実装する */}
+              <Route path="/places" element={<LegacyPlacesRedirect />} />
               <Route path="/places/new" element={<PlaceNewPage />} />
               <Route path="/places/:id/edit" element={<PlaceEditPage />} />
             </Route>

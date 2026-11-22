@@ -62,9 +62,8 @@ const PLACE_EDIT_PATH = /^\/places\/[^/]+\/edit$/
 /** 現在のパスに対応するメニュー項目(aria-currentを付ける項目)を返す */
 export function getCurrentNavKey(pathname: string): NavItemKey | null {
   if (pathname === '/places/new') return 'add'
-  if (pathname === '/') return 'map'
-  // 暫定: 都道府県別の場所一覧(/places?prefecture=)と編集画面は地図の一部として扱う。
-  // #18で地図ホームへ統合し、#19で/placesを「行きたい場所」にする際に見直す
-  if (pathname === '/places' || PLACE_EDIT_PATH.test(pathname)) return 'map'
+  // 地図ホーム(/、/?prefecture=)と、しおりパネルから開く編集画面は「地図」とする
+  if (pathname === '/' || PLACE_EDIT_PATH.test(pathname)) return 'map'
+  // /places は#19で全件一覧を実装したら 'places' を返す(それまでは / へ転送される)
   return null
 }
